@@ -261,29 +261,29 @@ export const options = {
         executor: 'constant-arrival-rate',
         rate: 1000,
         timeUnit: '1s',
-        duration: '30s',
+        duration: '60s',
         preAllocatedVUs: 700,
         maxVUs: 950,
       },
     },
-    // maxRedirects: 0,
+    maxRedirects: 0,
   };
 
 
-// export default function () {
-//     // getPareto(100);
-//   const url =
-//   [
-//       `http://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/c${getPareto(100)}_${Math.floor(Math.random()*100)}`,
-//   ];
-//     // console.log(url);
-//   url.forEach(myFunc);
-//   function myFunc(url){
-//     const res = http.get(url);
-//     // console.log(res.body);
-//   }
-// //   console.log(res.body);
-// }
+export default function () {
+    // getPareto(100);
+  const url =
+  [
+      `http://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/c${getPareto(100)}_${Math.floor(Math.random()*100)}`,
+  ];
+    // console.log(url);
+  url.forEach(myFunc);
+  function myFunc(url){
+    const res = http.get(url);
+    // console.log(res.body);
+  }
+//   console.log(res.body);
+}
 
 
 // discrete.js
@@ -321,26 +321,26 @@ export const options = {
 // }
 
 
-export default function ()
-{
-    // var short = getRandomString(getRandomInt(1));
-    // var lurl = "https://www.google.com/search?q=";
-    // console.log(short);
-    // const pre = "https://github.com/shubham11941140/short_url/";
-    const url = 'http://testingcache.eba-kyntw523.us-east-1.elasticbeanstalk.com/api/readshorten/CSD1234';
-    const payload = JSON.stringify({
-        // urldata: pre + short,
-        shorturl: `${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`
-    });
+// export default function ()
+// {
+//     // var short = getRandomString(getRandomInt(1));
+//     // var lurl = "https://www.google.com/search?q=";
+//     // console.log(short);
+//     // const pre = "https://github.com/shubham11941140/short_url/";
+//     const url = 'http://testingcache.eba-kyntw523.us-east-1.elasticbeanstalk.com/api/readshorten/CSD1234';
+//     const payload = JSON.stringify({
+//         // urldata: pre + short,
+//         shorturl: `${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`
+//     });
 
-    const params = {
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    };
+//     const params = {
+//     headers: {
+//         'Content-Type': 'application/json',
+//     },
+//     };
 
-    // send a HTTP POST request
-    // console.log(payload);
-    const res = http.post(url, payload, params);
-    // console.log(res.body);
-}
+//     // send a HTTP POST request
+//     // console.log(payload);
+//     const res = http.post(url, payload, params);
+//     // console.log(res.body);
+// }
