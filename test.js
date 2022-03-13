@@ -256,34 +256,41 @@ function myFunc(n){
 // myFunc(1);
 
 export const options = {
-    scenarios: {
-      constant_request_rate: {
-        executor: 'constant-arrival-rate',
-        rate: 1000,
-        timeUnit: '1s',
-        duration: '60s',
-        preAllocatedVUs: 700,
-        maxVUs: 950,
-      },
-    },
-    maxRedirects: 0,
-  };
-
-
+	duration: '60m',
+	vus: 10,
+	maxRedirects: 0,
+};
 export default function () {
-    // getPareto(100);
-  const url =
-  [
-      `http://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/c${getPareto(100)}_${Math.floor(Math.random()*100)}`,
-  ];
-    // console.log(url);
-  url.forEach(myFunc);
-  function myFunc(url){
-    const res = http.get(url);
-    // console.log(res.body);
-  }
-//   console.log(res.body);
+	const requests = [];
+	for(let i=0;i<80;i++){
+		const req1 = {
+			method: 'GET',
+			url: `http://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`,
+		};
+		requests.push(req1);
+	}
+	const res = http.batch(requests);
+	// const res = http.get(`http://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`);
+	// console.log(res.body);
 }
+
+
+
+
+// export default function () {
+//     // getPareto(100);
+//   const url =
+//   [
+//       `http://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/c${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`,
+//   ];
+//     // console.log(url);
+//   url.forEach(myFunc);
+//   function myFunc(url){
+//     const res = http.get(url);
+//     // console.log(res.body);
+//   }
+// //   console.log(res.body);
+// }
 
 
 // discrete.js
