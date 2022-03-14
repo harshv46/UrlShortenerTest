@@ -358,7 +358,7 @@ export default function ()
 
 
 export const options = {
-    duration: '1m',
+    duration: '60m',
     // vus: 1,
     maxRedirects: 0,
 	// discardResponseBodies: true,
