@@ -255,36 +255,28 @@ function myFunc(n){
 
 // myFunc(1);
 
-export const options = {
-	duration: '1m',
-	vus: 1,
-	maxRedirects: 0,
-};
-export default function () {
-	// const requests = [];
-	// for(let i=0;i<80;i++){
-	// 	const req1 = {
-	// 		method: 'GET',
-	// 		url: `http://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`,
-	// 	};
-	// 	requests.push(req1);
-	// }
-	// const res = http.batch(requests);
-	
-	const res = http.get(`http://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`);
-	// console.log(res.body);
-	if(res.timings.duration !==0 )
-		console.log(Date.now(), res.timings.duration);
-}
-
-
+// export const options = {
+//     scenarios: {
+//       constant_request_rate: {
+//         executor: 'constant-arrival-rate',
+//         rate: 1000,
+//         timeUnit: '1s',
+//         duration: '180s',
+//         preAllocatedVUs: 1,
+//         maxVUs: 1,
+//       },
+//     },
+//     maxRedirects: 0,
+// 	// batch: 100,
+// 	// discardResponseBodies: true,
+//   };
 
 
 // export default function () {
 //     // getPareto(100);
 //   const url =
 //   [
-//       `http://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/c${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`,
+//       `http://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/c${getPareto(1000)}_${Math.floor(Math.random()*1000)}`,
 //   ];
 //     // console.log(url);
 //   url.forEach(myFunc);
@@ -330,27 +322,65 @@ export default function () {
 //     // console.log(res.body);
 // }
 
+export var t = 0;
+export default function ()
+{
+    // var short = getRandomString(getRandomInt(1));
+    // var lurl = "https://www.google.com/search?q=";
+    // console.log(short);
+    // const pre = "https://github.com/shubham11941140/short_url/";
 
-// export default function ()
-// {
-//     // var short = getRandomString(getRandomInt(1));
-//     // var lurl = "https://www.google.com/search?q=";
-//     // console.log(short);
-//     // const pre = "https://github.com/shubham11941140/short_url/";
-//     const url = 'http://testingcache.eba-kyntw523.us-east-1.elasticbeanstalk.com/api/readshorten/CSD1234';
-//     const payload = JSON.stringify({
-//         // urldata: pre + short,
-//         shorturl: `${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`
-//     });
+	if(t===0)
+	{
+		console.log(Date.now(), 0, 0);
+		t=1;
+	}
 
-//     const params = {
-//     headers: {
-//         'Content-Type': 'application/json',
-//     },
-//     };
+    const url = 'http://testingcache.eba-kyntw523.us-east-1.elasticbeanstalk.com/api/readshorten/CSD1234';
+    const payload = JSON.stringify({
+        // urldata: pre + short,
+        shorturl: `${Math.floor(Math.random()*999)}_${Math.floor(Math.random()*999)}`
+    });
 
-//     // send a HTTP POST request
-//     // console.log(payload);
-//     const res = http.post(url, payload, params);
-//     // console.log(res.body);
+    const params = {
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    };
+
+    // send a HTTP POST request
+    // console.log(payload);
+    let res = http.post(url, payload, params);
+	let fail = ((res.status === 302)? 0:1);
+    console.log(Date.now(), res.timings.duration, fail);
+    // console.log(res.body);
+}
+
+
+export const options = {
+    duration: '1m',
+    // vus: 1,
+    maxRedirects: 0,
+	// discardResponseBodies: true,
+};
+
+// export var t = 0;
+// export default function () {
+//     // const requests = [];
+//     // for(let i=0;i<1000;i++){
+//     //     const req1 = {
+//     //         method: 'GET',
+//     //         url: `http://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`,
+//     //     };
+//     //     requests.push(req1);
+//     // }
+//     // const res = http.batch(requests);
+// 	if(t===0)
+// 	{
+// 		console.log(Date.now(), 0, 0);
+// 		t=1;
+// 	}
+//     const res = http.get(`http://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/${Math.floor(Math.random()*999)}_${Math.floor(Math.random()*999)}`);
+// 	let fail = ((res.status === 302)? 0:1);
+//     console.log(Date.now(), res.timings.duration, fail);
 // }
