@@ -1,4 +1,5 @@
 import http from "k6/http";
+import { sleep } from "k6";
 // import { check } from 'k6';
 
 export var SJS = (function(){
@@ -255,23 +256,37 @@ function myFunc(n){
 
 // myFunc(1);
 
+
+function randomExponential(rate) {
+	// http://en.wikipedia.org/wiki/Exponential_distribution#Generating_exponential_variates
+	rate = rate || 1;
+  
+	// Allow to pass a random uniform value or function
+	// Default to Math.random()
+	var U = Math.random();
+  
+	return -Math.log(U)/rate;
+  }
+  
+
 export const options = {
-	duration: '1m',
-	vus: 1,
+	duration: '120m',
+	vus: 10,
 	maxRedirects: 0,
 };
 export default function () {
-	// const requests = [];
-	// for(let i=0;i<10;i++){
-	// 	const req1 = {
-	// 		method: 'GET',
-	// 		url: `http://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`,
-	// 	};
-	// 	requests.push(req1);
-	// }
-	// const res = http.batch(requests);
+	const requests = [];
+	for(let i=0;i<80;i++){
+		const req1 = {
+			method: 'GET',
+			url: `https://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`,
+		};
+		requests.push(req1);
+	}
+	const res = http.batch(requests);
+	sleep(randomExponential(1));
 	
-	const res = http.get(`http://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`);
+	// const res = http.get(`http://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`);
 	// console.log(res.body);
 	// if(res.timings.duration !==0 )
 		// console.log(Date.now(), res.timings.duration);
