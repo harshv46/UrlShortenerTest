@@ -262,7 +262,7 @@ export const options = {
 };
 export default function () {
 	// const requests = [];
-	// for(let i=0;i<80;i++){
+	// for(let i=0;i<10;i++){
 	// 	const req1 = {
 	// 		method: 'GET',
 	// 		url: `http://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`,
@@ -273,8 +273,8 @@ export default function () {
 	
 	const res = http.get(`http://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`);
 	// console.log(res.body);
-	if(res.timings.duration !==0 )
-		console.log(Date.now(), res.timings.duration);
+	// if(res.timings.duration !==0 )
+		// console.log(Date.now(), res.timings.duration);
 }
 
 
