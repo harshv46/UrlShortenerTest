@@ -75,8 +75,8 @@ export default function () {
 	// send a HTTP POST request
 	const res = http.post(url, payload, params);
 	// console.log(res.body);
-	if(res.timings.duration !==0 )
-		console.log(Date.now(), res.timings.duration);
+	// if(res.timings.duration !==0 )
+		// console.log(Date.now(), res.timings.duration);
     sleep(randomExponential(3000));
 }
 
