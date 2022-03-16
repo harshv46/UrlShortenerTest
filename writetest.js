@@ -378,7 +378,7 @@ export default function ()
         // urldata: pre + short,
 		longurldata: `https://www.google.com/wrt`,
 		ttl: 30,
-        customurldata: `wrt${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`
+        customurldata: `rt${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`
     });
 
     const params = {
