@@ -270,7 +270,7 @@ function randomExponential(rate) {
   
 
 export const options = {
-	duration: '60m',
+	duration: '1m',
 	vus: 10,
 	maxRedirects: 0,
 };
@@ -348,10 +348,6 @@ export const options = {
 
 export default function ()
 {
-    // var short = getRandomString(getRandomInt(1));
-    // var lurl = "https://www.google.com/search?q=";
-    // console.log(short);
-    // const pre = "https://github.com/shubham11941140/short_url/";
 	const requests = [];
 	for(let i=0;i<80;i++){
 		const req = {
@@ -369,6 +365,8 @@ export default function ()
 	}
 	const res = http.batch(requests);
 
+	// uncommnet below lines for sequential reads 1 at a time
+
     // const url = 'https://Url15mar-env.eba-uxmrdhvz.ap-south-1.elasticbeanstalk.com/api/readshorten/CSD1234';
     // const payload = JSON.stringify({
     //     // urldata: pre + short,
@@ -380,10 +378,6 @@ export default function ()
     //     'Content-Type': 'application/json',
     // },
     // };
-
-    // send a HTTP POST request
-    // console.log(payload);
     // const res = http.post(url, payload, params);
-    // console.log(res.body);
 	sleep(randomExponential(1));
 }
