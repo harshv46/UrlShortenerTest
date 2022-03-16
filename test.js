@@ -270,7 +270,7 @@ function randomExponential(rate) {
   
 
 export const options = {
-	duration: '1m',
+	duration: '60m',
 	vus: 10,
 	maxRedirects: 0,
 };
