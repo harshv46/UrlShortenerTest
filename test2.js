@@ -57,46 +57,46 @@ export function getPareto(){
 }
 
 //CHOICE 2 READ LOADING
-export default function () {
-	const url = 'https://Url15mar-env.eba-uxmrdhvz.ap-south-1.elasticbeanstalk.com/api/readshorten/CSD1234';
-
-	//Just Method to call Pareto Number
-	
-	const payload = JSON.stringify({
-		// urldata: pre + short,
-		shorturl: `${getPareto()}_${Math.floor(Math.random() * 999)}`
-	});
-
-	const params = {
-		headers: {
-			'Content-Type': 'application/json',
-		},
-	};
-	// send a HTTP POST request
-	const res = http.post(url, payload, params);
-	// console.log(res.body);
-	// if(res.timings.duration !==0 )
-		// console.log(Date.now(), res.timings.duration);
-    sleep(randomExponential(3000));
-}
-
-
-//CHOICE 1 READ LOADING
 // export default function () {
-// 	// const requests = [];
-// 	// for(let i=0;i<80;i++){
-// 	// 	const req1 = {
-// 	// 		method: 'GET',
-// 	// 		url: `http://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`,
-// 	// 	};
-// 	// 	requests.push(req1);
-// 	// }
-// 	// const res = http.batch(requests);
+// 	const url = 'https://Url15mar-env.eba-uxmrdhvz.ap-south-1.elasticbeanstalk.com/api/readshorten/CSD1234';
 
-// 	const res = http.get(`http://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`);
+// 	//Just Method to call Pareto Number
+	
+// 	const payload = JSON.stringify({
+// 		// urldata: pre + short,
+// 		shorturl: `${getPareto()}_${Math.floor(Math.random() * 999)}`
+// 	});
+
+// 	const params = {
+// 		headers: {
+// 			'Content-Type': 'application/json',
+// 		},
+// 	};
+// 	// send a HTTP POST request
+// 	const res = http.post(url, payload, params);
 // 	// console.log(res.body);
 // 	// if(res.timings.duration !==0 )
 // 		// console.log(Date.now(), res.timings.duration);
+//     sleep(randomExponential(3000));
 // }
+
+
+//CHOICE 1 READ LOADING
+export default function () {
+	// const requests = [];
+	// for(let i=0;i<80;i++){
+	// 	const req1 = {
+	// 		method: 'GET',
+	// 		url: `http://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`,
+	// 	};
+	// 	requests.push(req1);
+	// }
+	// const res = http.batch(requests);
+
+	const res = http.get(`https://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`);
+	// console.log(res.body);
+	// if(res.timings.duration !==0 )
+		// console.log(Date.now(), res.timings.duration);
+}
 
 

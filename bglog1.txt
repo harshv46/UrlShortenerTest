@@ -1,0 +1,33 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/   
+     /\  /  \     |  |/  /   /  /    
+    /  \/    \    |     (   /   ‾‾\  
+   /          \   |  |\  \ |  (‾)  | 
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: test2.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 1000 max VUs, 1h0m30s max duration (incl. graceful stop):
+           * constant_request_rate: 5000.00 iterations/s for 1h0m0s (maxVUs: 900-1000, gracefulStop: 30s)
+
+
+     data_received..................: 2.1 GB  637 kB/s
+     data_sent......................: 886 MB  270 kB/s
+     dropped_iterations.............: 7893517 2406.870742/s
+     http_req_blocked...............: avg=98.06µs  min=0s      med=500ns    max=5.15s    p(90)=1.4µs    p(95)=1.6µs   
+     http_req_connecting............: avg=31.43µs  min=0s      med=0s       max=1.58s    p(90)=0s       p(95)=0s      
+     http_req_duration..............: avg=346.9ms  min=0s      med=298.21ms max=49.81s   p(90)=587.84ms p(95)=724.06ms
+       { expected_response:true }...: avg=347.03ms min=58.32ms med=298.35ms max=49.81s   p(90)=587.92ms p(95)=724.22ms
+     http_req_failed................: 0.05%   ✓ 4724        ✗ 8499142
+     http_req_receiving.............: avg=552.63µs min=0s      med=105µs    max=8.04s    p(90)=779µs    p(95)=1.42ms  
+     http_req_sending...............: avg=345.36µs min=0s      med=99.7µs   max=275.38ms p(90)=444.7µs  p(95)=837.5µs 
+     http_req_tls_handshaking.......: avg=63.81µs  min=0s      med=0s       max=4.06s    p(90)=0s       p(95)=0s      
+     http_req_waiting...............: avg=346ms    min=0s      med=297.43ms max=49.81s   p(90)=586.95ms p(95)=722.8ms 
+     http_reqs......................: 8503866 2592.976777/s
+     iteration_duration.............: avg=355.92ms min=58.62ms med=299.5ms  max=49.81s   p(90)=589.59ms p(95)=728.14ms
+     iterations.....................: 8503866 2592.976777/s
+     vus............................: 1000    min=1000      max=1000 
+     vus_max........................: 1000    min=1000      max=1000 
+
