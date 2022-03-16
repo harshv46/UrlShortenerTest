@@ -222,17 +222,17 @@ function sample_from_array(array, numSamples, withReplacement) {
     }
     return result;
 }
-export function getRandomIntInclusivePareto(min, max, alpha = 1.0) {
-    var probabilities = []; // probabilities 
-    for (var k = min; k <= max; ++k) {
-        probabilities.push(1.0/Math.pow(k, alpha)); // computed according to Paretto
-    }                                               // would be normalized by SJS
+// export function getRandomIntInclusivePareto(min, max, alpha = 1.0) {
+//     var probabilities = []; // probabilities 
+//     for (var k = min; k <= max; ++k) {
+//         probabilities.push(1.0/Math.pow(k, alpha)); // computed according to Paretto
+//     }                                               // would be normalized by SJS
 
-    var disc = SJS.Discrete(probabilities); // discrete sampler, returns value in the [0...probabilities.length-1] range
-    let q = disc.draw() + min; // back to [min...max] interval
+//     var disc = SJS.Discrete(probabilities); // discrete sampler, returns value in the [0...probabilities.length-1] range
+//     let q = disc.draw() + min; // back to [min...max] interval
 
-    return q;
-}
+//     return q;
+// }
 
 // console.log("Testing Paretto");
 
@@ -240,9 +240,34 @@ export function getRandomIntInclusivePareto(min, max, alpha = 1.0) {
 
 // console.log(t);
 
-export function getPareto(n){
-    return getRandomIntInclusivePareto(1,n, 1);
+export function getPareto(){
+	let pareto = 0;
+	{
+		let num = Math.floor(Math.random() * 1000);
+		
+		if (num < 800) {
+			if(num<600) {
+				pareto = Math.floor(Math.random()*40);
+			}
+			else{
+				pareto = Math.floor(Math.random()*160) + 40;
+			}
+		}
+		else if (num < 960) {
+			pareto = Math.floor(Math.random() * 160) + 200;
+		}
+		else {
+			pareto = Math.floor(Math.random()*640) + 360;
+		}
+	}
+	return pareto;
 }
+
+
+// export function getPareto(n){
+// 	// let q = disc.draw() + 1;
+//     return getRandomIntInclusivePareto(1,n, 1);
+// }
 function myFunc(n){
     // var map1 = new Map();
     // console.log(`http://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/c${getPareto(100)}_${Math.floor(Math.random()*100)}`);
@@ -269,11 +294,27 @@ function randomExponential(rate) {
   }
   
 
+// export const options = {
+// 	duration: '1m',
+// 	vus: 1,
+// 	maxRedirects: 0,
+// };
+
+
 export const options = {
-	duration: '60m',
-	vus: 10,
+	scenarios: {
+	  constant_request_rate: {
+		executor: 'constant-arrival-rate',
+		rate: 1000,
+		timeUnit: '1s', // 1000 iterations per second, i.e. 1000 RPS
+		duration: '30s',
+		preAllocatedVUs: 500, // how large the initial pool of VUs would be
+		maxVUs: 500, // if the preAllocatedVUs are not enough, we can initialize more
+	  },
+	},
 	maxRedirects: 0,
-};
+  };
+
 // export default function () {
 // 	const requests = [];
 // 	for(let i=0;i<80;i++){
@@ -348,36 +389,41 @@ export const options = {
 
 export default function ()
 {
-	const requests = [];
-	for(let i=0;i<80;i++){
-		const req = {
-			method: 'POST',
-			url : 'https://Url15mar-env.eba-uxmrdhvz.ap-south-1.elasticbeanstalk.com/api/readshorten/CSD1234',
-			body: JSON.stringify({
-				// urldata: pre + short,
-				shorturl: `${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`
-			}),
-			params: {
-				headers: { 'Content-Type': 'application/json' },
-			},
-		};
-		requests.push(req);
-	}
-	const res = http.batch(requests);
+    // var short = getRandomString(getRandomInt(1));
+    // var lurl = "https://www.google.com/search?q=";
+    // console.log(short);
+    // const pre = "https://github.com/shubham11941140/short_url/";
+	// const requests = [];
+	// for(let i=0;i<80;i++){
+	// 	const req = {
+	// 		method: 'POST',
+	// 		url : 'https://Url15mar-env.eba-uxmrdhvz.ap-south-1.elasticbeanstalk.com/api/readshorten/CSD1234',
+	// 		body: JSON.stringify({
+	// 			// urldata: pre + short,
+	// 			shorturl: `${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`
+	// 		}),
+	// 		params: {
+	// 			headers: { 'Content-Type': 'application/json' },
+	// 		},
+	// 	};
+	// 	requests.push(req);
+	// }
+	// const res = http.batch(requests);
 
-	// uncommnet below lines for sequential reads 1 at a time
+	//uncommnet below lines for sequential reads 1 at a time
 
-    // const url = 'https://Url15mar-env.eba-uxmrdhvz.ap-south-1.elasticbeanstalk.com/api/readshorten/CSD1234';
-    // const payload = JSON.stringify({
-    //     // urldata: pre + short,
-    //     shorturl: `${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`
-    // });
+    const url = 'https://Url15mar-env.eba-uxmrdhvz.ap-south-1.elasticbeanstalk.com/api/readshorten/CSD1234';
+    const payload = JSON.stringify({
+        // urldata: pre + short,
+        shorturl: `${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`
+		// shorturl: '1_1'
+    });
 
-    // const params = {
-    // headers: {
-    //     'Content-Type': 'application/json',
-    // },
-    // };
-    // const res = http.post(url, payload, params);
-	sleep(randomExponential(1));
+    const params = {
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    };
+    const res = http.post(url, payload, params);
+	// sleep(randomExponential(1));
 }
