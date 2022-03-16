@@ -274,23 +274,23 @@ export const options = {
 	vus: 10,
 	maxRedirects: 0,
 };
-export default function () {
-	const requests = [];
-	for(let i=0;i<80;i++){
-		const req1 = {
-			method: 'GET',
-			url: `https://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`,
-		};
-		requests.push(req1);
-	}
-	const res = http.batch(requests);
-	sleep(randomExponential(1));
+// export default function () {
+// 	const requests = [];
+// 	for(let i=0;i<80;i++){
+// 		const req1 = {
+// 			method: 'GET',
+// 			url: `https://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`,
+// 		};
+// 		requests.push(req1);
+// 	}
+// 	const res = http.batch(requests);
+// 	sleep(randomExponential(1));
 	
-	// const res = http.get(`http://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`);
-	// console.log(res.body);
-	// if(res.timings.duration !==0 )
-		// console.log(Date.now(), res.timings.duration);
-}
+// 	// const res = http.get(`http://url-shortener4-dev.ap-south-1.elasticbeanstalk.com/${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`);
+// 	// console.log(res.body);
+// 	// if(res.timings.duration !==0 )
+// 		// console.log(Date.now(), res.timings.duration);
+// }
 
 
 
@@ -346,26 +346,44 @@ export default function () {
 // }
 
 
-// export default function ()
-// {
-//     // var short = getRandomString(getRandomInt(1));
-//     // var lurl = "https://www.google.com/search?q=";
-//     // console.log(short);
-//     // const pre = "https://github.com/shubham11941140/short_url/";
-//     const url = 'http://testingcache.eba-kyntw523.us-east-1.elasticbeanstalk.com/api/readshorten/CSD1234';
-//     const payload = JSON.stringify({
-//         // urldata: pre + short,
-//         shorturl: `${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`
-//     });
+export default function ()
+{
+    // var short = getRandomString(getRandomInt(1));
+    // var lurl = "https://www.google.com/search?q=";
+    // console.log(short);
+    // const pre = "https://github.com/shubham11941140/short_url/";
+	const requests = [];
+	for(let i=0;i<80;i++){
+		const req = {
+			method: 'POST',
+			url : 'https://Url15mar-env.eba-uxmrdhvz.ap-south-1.elasticbeanstalk.com/api/readshorten/CSD1234',
+			body: JSON.stringify({
+				// urldata: pre + short,
+				shorturl: `${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`
+			}),
+			params: {
+				headers: { 'Content-Type': 'application/json' },
+			},
+		};
+		requests.push(req);
+	}
+	const res = http.batch(requests);
 
-//     const params = {
-//     headers: {
-//         'Content-Type': 'application/json',
-//     },
-//     };
+    // const url = 'https://Url15mar-env.eba-uxmrdhvz.ap-south-1.elasticbeanstalk.com/api/readshorten/CSD1234';
+    // const payload = JSON.stringify({
+    //     // urldata: pre + short,
+    //     shorturl: `${getPareto(1001)-1}_${Math.floor(Math.random()*999)}`
+    // });
 
-//     // send a HTTP POST request
-//     // console.log(payload);
-//     const res = http.post(url, payload, params);
-//     // console.log(res.body);
-// }
+    // const params = {
+    // headers: {
+    //     'Content-Type': 'application/json',
+    // },
+    // };
+
+    // send a HTTP POST request
+    // console.log(payload);
+    // const res = http.post(url, payload, params);
+    // console.log(res.body);
+	sleep(randomExponential(1));
+}
