@@ -1,6 +1,26 @@
-import http from "k6/http";
 import { sleep } from "k6";
+import http from "k6/http";
 
+
+export const options = {
+    scenarios: {
+      constant_request_rate: {
+        executor: 'constant-arrival-rate',
+        rate: 200,
+        timeUnit: '1s',
+        duration: '60m',
+        preAllocatedVUs: 200,
+        maxVUs: 1000,
+      },
+    },
+    maxRedirects: 0,
+  };
+// export const options = {
+// 	duration: '30s',
+// 	vus: 1000,
+// 	maxRedirects: 0,
+// 	// discardResponseBodies: true,
+// };
 
 function randomExponential(rate) {
 	// http://en.wikipedia.org/wiki/Exponential_distribution#Generating_exponential_variates
@@ -12,13 +32,35 @@ function randomExponential(rate) {
   
 	return -Math.log(U)/rate;
   }
-  
 
-export const options = {
-	duration: '60m',
-	vus: 1,
-	maxRedirects: 0,
-};
+export function getPareto(){
+	let pareto = 0;
+	{
+		let num = Math.floor(Math.random() * 1000);
+		
+		if (num < 800) {
+			if(num<600) {
+				pareto = Math.floor(Math.random()*40);
+			}
+			else{
+				pareto = Math.floor(Math.random()*160) + 40;
+			}
+		}
+		else if (num < 960) {
+			pareto = Math.floor(Math.random() * 160) + 200;
+		}
+		else {
+			pareto = Math.floor(Math.random()*640) + 360;
+		}
+	}
+	return pareto;
+}
+
+// export const options = {
+// 	duration: '60m',
+// 	vus: 1,
+// 	maxRedirects: 0,
+// };
 // export default function () {
 // 	const requests = [];
 // 	for(let i=0;i<80;i++){
@@ -133,6 +175,6 @@ export default function ()
     };
     // console.log(payload);
     const res = http.post(url, payload, params);
-    console.log(res.body);
+    // console.log(res.body);
 	sleep(randomExponential(50));
 }
