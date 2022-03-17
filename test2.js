@@ -97,6 +97,7 @@ export default function () {
 	// console.log(res.body);
 	// if(res.timings.duration !==0 )
 		// console.log(Date.now(), res.timings.duration);
+    sleep(randomExponential(3000));
 }
 
 
